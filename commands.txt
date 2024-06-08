@@ -1,0 +1,24 @@
+# instalar yarn
+npm install -g yarn
+
+# Iniciar novo projeto
+ yarn init -y
+
+# Dependencias
+yarn add typescript jest @types/jest ts—node ts—jest nodemon
+
+# Iniciar typescript
+## TypeScript é um superset tipado do JavaScript, desenvolvido pela Microsoft.
+## Compilação: alvo é um código de mais baixo nível (Assembly ou máquina);
+## Transpilação: alvo é um código de alto nível diferente ou a mesma escrita de outra forma.
+
+npx tsc --init
+
+-- incluir src e test
+
+# Iniciar test
+npx ts-jest config:init
+
+# Rodando ts
+npx ts-node src/main.ts
+
