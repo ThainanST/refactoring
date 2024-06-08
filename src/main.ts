@@ -1,71 +1,50 @@
 // @ts-nocheck
-// calculate ride
-export function calc (movArray) {
-    let result = 0;
-    for (const mov of movArray) {
-        if (mov.dist != null && mov.dist != undefined && typeof mov.dist === "number" && mov.dist > 0) {
-            if (mov.ds != null && mov.ds != undefined && mov.ds instanceof Date && mov.ds.toString() !== "Invalid Date") {
+const DAYTIME_NORMAL_FARE = 2.10;
+const DAYTIME_SUNDAY_FARE = 2.90;
+const NIGHT_NORMAL_FARE = 3.90;
+const NIGHT_SUNDAY_FARE = 5.00;
+const MINIMUM_FARE = 10;
+const NIGHT_START = 22;
+const NIGHT_END = 6;
 
-                // overnight
-
-                if (mov.ds.getHours() >= 22 || mov.ds.getHours() <= 6) {
-
-                    // not sunday
-                    if (mov.ds.getDay() !== 0) {
-
-                        result += mov.dist * 3.90;
-                    // sunday
-                    } else {
-                        result += mov.dist * 5;
-
-                    }
-                } else {
-                    // sunday
-                    if (mov.ds.getDay() === 0) {
-
-                        result += mov.dist * 2.9;
-
-                    } else {
-                        result += mov.dist * 2.10;
-
-                    }
-                }
-            } else {
-                // console.log(d);
-                return -2;
-            }
-        } else {
-            // console.log(dist);
-
-            return -1;
+export function calculateRide (segments) {
+    let fare = 0;
+    for (const segment of segments) {
+        if (!isValidDistance(segment.distance)) throw new Error("Invalid distance");
+        if (!isValidDate(segment.date)) throw new Error("Invalid date");
+        if (isOvernight(segment.date) && !isSunday(segment.date)) {
+            fare += segment.distance * NIGHT_NORMAL_FARE;
+            continue;
         }
-
+        if (isOvernight(segment.date) && isSunday(segment.date)) {
+            fare += segment.distance * NIGHT_SUNDAY_FARE;
+            continue;
+        } 
+        if (!isOvernight(segment.date) && isSunday(segment.date)) {
+            fare += segment.distance * DAYTIME_SUNDAY_FARE;
+            continue;
+        }
+        if (!isOvernight(segment.date) && !isSunday(segment.date)) {
+            fare += segment.distance * DAYTIME_NORMAL_FARE;
+            continue;
+        }
     }
-    if (result < 10) {
-        return 10;
-    } else {
-        return result;
-    }
+    return (fare < MINIMUM_FARE) ? MINIMUM_FARE : fare; 
 }
 
-console.log(calc([
-    { dist: 10, ds: new Date("2021-03-01T10:00:00") }
-]));
-console.log(calc([
-    {dist: 10, ds: new Date("2021-03-01T23:00:00") }
-]));
-console.log(calc([
-    { dist: 10, ds: new Date("2021-03-07T10:00:00") }
-]));
-console.log(calc([
-    {dist: 10, ds: new Date("2021-03-07T23:00:00") }
-]));
-console.log(calc([
-    {dist: -10, ds: new Date("2021-03-01T10:00:00") }
-]));
-console.log(calc([
-    {dist: 10, ds: new Date("abcdef") }
-]));
-console.log(calc([
-    {dist: 3, ds: new Date("2021-03-01T10:00:00") }
-]));
+
+function isOvernight(date) {
+    return date.getHours() >= NIGHT_START || date.getHours() < NIGHT_END;
+}
+
+function isSunday(date) {
+    return date.getDay() === 0;
+}
+
+function isValidDistance(distance) {
+    return distance != null && distance != undefined && typeof distance === "number" && distance > 0;
+}
+
+function isValidDate(date) {
+    return date != null && date != undefined && date instanceof Date && date.toString() !== "Invalid Date";
+}
