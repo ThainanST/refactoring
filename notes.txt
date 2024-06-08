@@ -1,0 +1,60 @@
+# instalar yarn
+npm install -g yarn
+
+# Iniciar novo projeto
+ yarn init -y
+
+# Dependencias
+yarn add typescript jest @types/jest ts—node ts—jest nodemon
+
+# Iniciar typescript
+## TypeScript é um superset tipado do JavaScript, desenvolvido pela Microsoft.
+## Compilação: alvo é um código de mais baixo nível (Assembly ou máquina);
+## Transpilação: alvo é um código de alto nível diferente ou a mesma escrita de outra forma.
+
+npx tsc --init
+
+-- incluir src e test
+
+# Iniciar test
+npx ts-jest config:init
+
+# Rodando ts
+npx ts-node src/main.ts
+
+# Rodar teste
+npx jest
+npx jest --coverage
+npx jest --watchAll
+
+# Vscode
+## Quebra de linha: Alt + z
+## Selecionar uma de cada vez: Ctrl + D
+## Selecionar todas: Ctrl + Shift + L
+
+## Code-smells
+1. Nomes estranhos
+    - Renomear variáveis, métodos, classes, arquivos
+
+2. Linhas em branco dentro de métodos
+
+3. Comentários
+    - variáveis explicativas
+    - introduzir métodos
+
+4. Condições confusas (aninhadas)
+    - cláusula-guarda
+        errado: if (isValid) { follow; } else {return -1};
+        certo: if(!isValid) {return -1} follow
+
+    - consolidar Condições
+        A && B
+    
+    - Ternário
+
+
+5. Tratamento de erros
+    - 
+
+# Bibliografia
+
