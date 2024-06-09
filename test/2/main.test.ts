@@ -1,4 +1,4 @@
-import { calculateRide } from "../src/2/main";
+import { calculateRide } from "../../src/2/main";
 
 test("Deve calcular corrida normal-diurna", function () {
     const segments = [
