@@ -4,23 +4,23 @@ export default class Segment {
     NIGHT_END = 6;
 
     constructor (readonly distance: number, readonly date: Date) {
-        if (!this.isValidDistance(distance)) throw new Error("Invalid distance");
-        if (!this.isValidDate(date)) throw new Error("Invalid date");
+        if (!this.isValidDistance()) throw new Error("Invalid distance");
+        if (!this.isValidDate()) throw new Error("Invalid date");
     }
 
-    isValidDistance(distance: number): boolean {
-        return distance != null && distance != undefined && typeof distance === "number" && distance > 0;
+    isValidDistance(): boolean {
+        return this.distance != null && this.distance != undefined && typeof this.distance === "number" && this.distance > 0;
     }
     
-    isValidDate(date: Date): boolean {
-        return date != null && date != undefined && date instanceof Date && date.toString() !== "Invalid Date";
+    isValidDate(): boolean {
+        return this.date != null && this.date != undefined && this.date instanceof Date && this.date.toString() !== "Invalid Date";
     }
 
-    isOvernight(date: Date): boolean {
-        return date.getHours() >= this.NIGHT_START || date.getHours() < this.NIGHT_END;
+    isOvernight(): boolean {
+        return this.date.getHours() >= this.NIGHT_START || this.date.getHours() < this.NIGHT_END;
     }
     
-    isSunday(date: Date): boolean {
-        return date.getDay() === 0;
+    isSunday(): boolean {
+        return this.date.getDay() === 0;
     }
 }
