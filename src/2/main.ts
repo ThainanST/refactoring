@@ -1,4 +1,3 @@
-// @ts-nocheck
 const DAYTIME_NORMAL_FARE = 2.10;
 const DAYTIME_SUNDAY_FARE = 2.90;
 const NIGHT_NORMAL_FARE = 3.90;
@@ -7,7 +6,7 @@ const MINIMUM_FARE = 10;
 const NIGHT_START = 22;
 const NIGHT_END = 6;
 
-export function calculateRide (segments) {
+export function calculateRide (segments: any) {
     let fare = 0;
     for (const segment of segments) {
         if (!isValidDistance(segment.distance)) throw new Error("Invalid distance");
@@ -33,18 +32,18 @@ export function calculateRide (segments) {
 }
 
 
-function isOvernight(date) {
+function isOvernight(date: Date) {
     return date.getHours() >= NIGHT_START || date.getHours() < NIGHT_END;
 }
 
-function isSunday(date) {
+function isSunday(date: Date) {
     return date.getDay() === 0;
 }
 
-function isValidDistance(distance) {
+function isValidDistance(distance: number) {
     return distance != null && distance != undefined && typeof distance === "number" && distance > 0;
 }
 
-function isValidDate(date) {
+function isValidDate(date: Date) {
     return date != null && date != undefined && date instanceof Date && date.toString() !== "Invalid Date";
 }

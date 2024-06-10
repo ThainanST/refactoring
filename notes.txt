@@ -54,7 +54,14 @@ npx jest --watchAll
 
 
 5. Tratamento de erros
-    - 
+    - introduzir tratamento
+
+6. Classe grande
+    - extrair classes
+    - mover métodos
+
+8. Longa lista de parâmetros
+    - introdução de objetos
 
 # Bibliografia
-
+(2019)[Martin Fowler][Refatoração - Aprefeiçoando o design de códigos existentes]
