@@ -1,5 +1,4 @@
 import Segment from './Segment';
-import FareCalculatorFactory from './FareCalculatorFactory';
 import FareCalculatorHandler from './FareCalculatorHandler';
 
 export default class Ride {
